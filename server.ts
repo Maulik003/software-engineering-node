@@ -1,11 +1,21 @@
 import express, {Request, Response} from 'express';
-const app = express();
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import UserController from "./controller/UserController";
+import TuitController from "./controller/TuitController";
 
-app.get('/hello', (req: Request, res: Response) =>
-    res.send('Hello World!'));
+const app = express();
+mongoose.connect('mongodb://localhost:27017/tuiter');
+app.use(bodyParser.json())
+
+app.get('/', (req: Request, res: Response) =>
+    res.send('Welcome!'));
 
 app.get('/add/:a/:b', (req: Request, res: Response) =>
     res.send(req.params.a + req.params.b));
+
+const userController = UserController.getInstance(app);
+const tuitController = TuitController.getInstance(app);
 
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
