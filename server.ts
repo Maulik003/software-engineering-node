@@ -1,7 +1,7 @@
 import express, {Request, Response} from 'express';
 import mongoose from "mongoose";
 
-mongoose.connect('mongodb+srv://Maulik003:<password>@cluster0.qcvyx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://Maulik003:Maulik123@cluster0.qcvyx.mongodb.net/Tuiter?retryWrites=true&w=majority');
 import bodyParser from "body-parser";
 import UserController from "./controller/UserController";
 import TuitController from "./controller/TuitController";
