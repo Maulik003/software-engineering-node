@@ -1,11 +1,11 @@
 import express, {Request, Response} from 'express';
 import mongoose from "mongoose";
+mongoose.connect('mongodb://localhost:27017/tuiter');
 import bodyParser from "body-parser";
 import UserController from "./controller/UserController";
 import TuitController from "./controller/TuitController";
 
 const app = express();
-mongoose.connect('mongodb://localhost:27017/tuiter');
 app.use(bodyParser.json())
 
 app.get('/', (req: Request, res: Response) =>
