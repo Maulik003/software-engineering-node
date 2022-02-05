@@ -6,19 +6,20 @@ export default class TuitController implements TuitControllerI {
     private static tuitDao: TuitDao = TuitDao.getInstance();
     private static tuitController: TuitController | null = null;
     public static getInstance = (app: Express): TuitController => {
-        if(TuitController.tuitController === null) {
+        if (TuitController.tuitController === null) {
             TuitController.tuitController = new TuitController();
-            app.get("/api/tuits", TuitController.tuitController.findAllTuits);
-            app.get("/api/users/:uid/tuits", TuitController.tuitController.findTuitsByUser);
-            app.get("/api/tuits/:uid", TuitController.tuitController.findTuitById);
-            app.post("/api/users/:uid/tuits", TuitController.tuitController.createTuit);
-            app.put("/api/tuits/:uid", TuitController.tuitController.updateTuit);
-            app.delete("/api/tuits/:uid", TuitController.tuitController.deleteTuit);
+            app.get("/tuits", TuitController.tuitController.findAllTuits);
+            app.get("/users/:uid/tuits", TuitController.tuitController.findTuitsByUser);
+            app.get("/tuits/:tid", TuitController.tuitController.findTuitById);
+            app.post("/users/:uid/tuits", TuitController.tuitController.createTuit);
+            app.put("/tuits/:tid", TuitController.tuitController.updateTuit);
+            app.delete("/tuits/:tid", TuitController.tuitController.deleteTuit);
         }
         return TuitController.tuitController;
     }
 
-    private constructor() {}
+    private constructor() {
+    }
 
     findAllTuits = (req: Request, res: Response) =>
         TuitController.tuitDao.findAllTuits()
@@ -32,9 +33,8 @@ export default class TuitController implements TuitControllerI {
         TuitController.tuitDao.findTuitsByUser(req.params.uid)
             .then(tuit => res.json(tuit));
 
-
     createTuit = (req: Request, res: Response) =>
-        TuitController.tuitDao.createTuit(req.body)
+        TuitController.tuitDao.createTuit(req.params.uid, req.body)
             .then(tuit => res.json(tuit));
 
     updateTuit = (req: Request, res: Response) =>
