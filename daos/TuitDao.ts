@@ -3,8 +3,8 @@
  * to integrate with MongoDB
  */
 import TuitDaoI from "../interfaces/TuitDaoI";
-import Tuit from "../models/Tuit";
-import TuitModel from "../mongoose/TuitModel";
+import Tuit from "../models/tuits/Tuit";
+import TuitModel from "../mongoose/tuits/TuitModel";
 
 /**
  * @class UserDao Implements Data Access Object managing data storage

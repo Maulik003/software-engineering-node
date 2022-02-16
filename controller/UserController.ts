@@ -4,7 +4,7 @@
 import UserDao from "../daos/UserDao";
 import {Express, Request, Response} from "express";
 import UserControllerI from "../interfaces/UserControllerI";
-import User from "../models/User";
+import User from "../models/users/User";
 
 /**
  * @class UserController Implements RESTful Web service API for users resource.
