@@ -9,7 +9,7 @@ export default interface MessageDaoI {
 
     findAllMessagesThatSentToUser(uid: string): Promise<Message[]>;
 
-    userDeletesMessage(message: string, uid: string, fuid: string): Promise<any>;
+    userDeletesMessage(mid: string): Promise<any>;
 
-    userMessagesAnotherUser(message: string, uid: string, fuid: string): Promise<Message>;
+    userMessagesAnotherUser(message: Message, uid: string, fuid: string): Promise<Message>;
 };

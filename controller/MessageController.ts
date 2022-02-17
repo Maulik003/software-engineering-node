@@ -12,7 +12,7 @@ export default class MessageController implements MessageControllerI {
             app.get("/api/users/:uid/messages/sent", MessageController.messageController.findAllMessagesThatUserSent);
             app.get("/api/users/:uid/messages/received", MessageController.messageController.findAllMessagesThatSentToUser);
             app.post("/api/users/:uid/messages/:fuid", MessageController.messageController.userMessagesAnotherUser);
-            app.delete("/api/users/:uid/messages/:fuid", MessageController.messageController.userDeletesMessage);
+            app.delete("/api/messages/:mid", MessageController.messageController.userDeletesMessage);
         }
         return MessageController.messageController;
     }
@@ -29,7 +29,7 @@ export default class MessageController implements MessageControllerI {
             .then(messages => res.json(messages));
 
     userDeletesMessage = (req: Request, res: Response) =>
-        MessageController.messageDao.userDeletesMessage(req.body, req.params.uid, req.params.fuid)
+        MessageController.messageDao.userDeletesMessage(req.params.mid)
             .then(status => res.send(status));
 
     userMessagesAnotherUser = (req: Request, res: Response) =>
