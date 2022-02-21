@@ -6,7 +6,7 @@
 import User from "../users/User";
 
 /**
- * @typedef Like Represents messages relationship between a user and another user,
+ * @typedef Message Represents messages relationship between a user and another user,
  * as in a user messages another user
  * @property {String} message message to be sent
  * @property {User} to User who receives

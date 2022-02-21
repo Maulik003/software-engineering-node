@@ -6,7 +6,7 @@
 import User from "../users/User";
 
 /**
- * @typedef Like Represents Follows relationship between a user and another User,
+ * @typedef Follow Represents Follows relationship between a user and another User,
  * as in a user follows another user
  * @property {User} userFollowed User being followed
  * @property {User} userFollowing User being following
