@@ -1,3 +1,7 @@
+/**
+ * @file Implements mongoose schema to CRUD
+ * documents in the users collection
+ */
 import mongoose from "mongoose";
 import User from "../../models/users/User";
 const UserSchema = new mongoose.Schema<User>({

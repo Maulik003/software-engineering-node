@@ -1,3 +1,7 @@
+/**
+ * @file Implements mongoose schema to CRUD
+ * documents in the likes collection
+ */
 import mongoose, {Schema} from "mongoose";
 import Like from "../../models/likes/Like";
 
