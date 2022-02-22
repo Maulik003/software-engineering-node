@@ -6,7 +6,7 @@ import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeControllerI";
 
 /**
- * @class TuitController Implements RESTful Web service API for likes resource.
+ * @class LikeController Implements RESTful Web service API for likes resource.
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>GET /api/users/:uid/likes to retrieve all the tuits liked by a user
@@ -29,10 +29,10 @@ export default class LikeController implements LikeControllerI {
      * Creates singleton controller instance
      * @param {Express} app Express instance to declare the RESTful Web service
      * API
-     * @return TuitController
+     * @return LikeController
      */
     public static getInstance = (app: Express): LikeController => {
-        if(LikeController.likeController === null) {
+        if (LikeController.likeController === null) {
             LikeController.likeController = new LikeController();
             app.get("/api/users/:uid/likes", LikeController.likeController.findAllTuitsLikedByUser);
             app.get("/api/tuits/:tid/likes", LikeController.likeController.findAllUsersThatLikedTuit);
@@ -42,7 +42,8 @@ export default class LikeController implements LikeControllerI {
         return LikeController.likeController;
     }
 
-    private constructor() {}
+    private constructor() {
+    }
 
     /**
      * Retrieves all users that liked a tuit from the database
@@ -67,6 +68,7 @@ export default class LikeController implements LikeControllerI {
             .then(likes => res.json(likes));
 
     /**
+     * Creates a new like instance
      * @param {Request} req Represents request from client, including the
      * path parameters uid and tid representing the user that is liking the tuit
      * and the tuit being liked
@@ -79,6 +81,7 @@ export default class LikeController implements LikeControllerI {
             .then(likes => res.json(likes));
 
     /**
+     * Removes a like instance from the database
      * @param {Request} req Represents request from client, including the
      * path parameters uid and tid representing the user that is unliking
      * the tuit and the tuit being unliked
