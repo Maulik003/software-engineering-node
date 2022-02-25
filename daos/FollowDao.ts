@@ -58,7 +58,7 @@ export default class FollowDao implements FollowDaoI {
      * @returns Promise To be notified when follow is removed into the database
      */
     userUnfollowsAnotherUser = async (uid: string, fuid: string): Promise<any> =>
-        FollowModel.deleteOne({userFollowed: uid, userFollowing: fuid});
+        FollowModel.deleteOne({userFollowed: fuid, userFollowing: uid});
 
     /**
      * Inserts follow instance into the database
@@ -67,6 +67,6 @@ export default class FollowDao implements FollowDaoI {
      * @returns Promise To be notified when follow is inserted into the database
      */
     userFollowsAnotherUser = async (uid: string, fuid: string): Promise<Follow> =>
-        FollowModel.create({userFollowed: uid, userFollowing: fuid});
+        FollowModel.create({userFollowed: fuid, userFollowing: uid});
 
 }
