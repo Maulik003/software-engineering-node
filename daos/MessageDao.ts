@@ -54,6 +54,30 @@ export default class MessageDao implements MessageDaoI {
             .populate("from", "username")
             .exec();
 
+
+    /**
+     * Uses MessageModel to retrieve all messages user sent on a particular date
+     * @param {string} uid User's primary key
+     * @param {string} date Date
+     * @returns Promise To be notified when messages is retrieved from the database
+     */
+    findAllMessagesSentOnDate = async (uid: string, date: string): Promise<Message[]> =>
+        MessageModel.find({from: uid, sentOn: date})
+            .populate("message")
+            .populate("to", "username")
+            .populate("from", "username")
+            .exec();
+
+    /**
+     * Updates message instance into the database
+     * @param {Message} message Instance to be inserted into the database
+     * @param {string} uid User's primary key
+     * @returns Promise To be notified when message is updated into the database
+     */
+    updateMessage = async (message: Message, mid: string): Promise<any> =>
+        MessageModel.updateOne({_id: mid},
+            {$set: message});
+
     /**
      * Removes message from the database.
      * @param {string} mid Primary key of message to be removed

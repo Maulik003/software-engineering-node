@@ -8,6 +8,10 @@ export default interface MessageControllerI {
 
     findAllMessagesThatSentToUser(req: Request, res: Response): void;
 
+    findAllMessagesSentOnDate(req: Request, res: Response): void;
+
+    updateMessage(req: Request, res: Response): void;
+
     userDeletesMessage(req: Request, res: Response): void;
 
     userMessagesAnotherUser(req: Request, res: Response): void;
