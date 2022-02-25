@@ -11,4 +11,6 @@ export default interface FollowControllerI {
     userUnfollowsAnotherUser(req: Request, res: Response): void;
 
     userFollowsAnotherUser(req: Request, res: Response): void;
+
+    checkUserFollowsAnotherUser(req: Request, res: Response): void;
 };

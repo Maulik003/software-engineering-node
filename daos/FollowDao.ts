@@ -52,6 +52,26 @@ export default class FollowDao implements FollowDaoI {
             .exec();
 
     /**
+     * Uses FollowModel to check if one user follows another user
+     * @param {string} uid User's primary key
+     * @param {string} fuid Other User's primary key
+     * @returns Promise To be notified when the results are retrieved from
+     * database
+     */
+    checkUserFollowsAnotherUser = async (uid: string, fuid: string): Promise<Boolean> =>
+        FollowModel.exists({'userFollowing': uid, 'userFollowed': fuid});
+
+    /**
+     * Uses FollowModel to check if one user is followed by another user
+     * @param {string} uid User's primary key
+     * @param {string} fuid Other User's primary key
+     * @returns Promise To be notified when the results are retrieved from
+     * database
+     */
+    checkUserIsFollowedByAnotherUser = async (uid: string, fuid: string): Promise<Boolean> =>
+        FollowModel.exists({'userFollowed': uid, 'userFollowing': fuid});
+
+    /**
      * Removes follow instance into the database
      * @param {string} uid User's primary key
      * @param {string} fuid Other User's primary key

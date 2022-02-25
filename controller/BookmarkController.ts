@@ -12,6 +12,8 @@ import BookmarkDao from "../daos/BookmarkDao";
  *     <li>POST /api/users/:uid/bookmarks/:tid to create a new bookmark instance for
  *     a given user</li>
  *     <li>GET /api/users/:uid/bookmarks to retrieve all the bookmarked tuit instances</li>
+ *     <li>GET /api/tuits/:tid/bookmarks to retrieve all the users who bookmarked tuit instances</li>
+ *     <li>GET /api/users/:uid/bookmarkscheck/:tid to check if the users has bookmarked tuit instances</li>
  *     <li>DELETE /api/users/:uid/bookmarks/:tid to remove a particular bookmarked tuit instance</li>
  * </ul>
  * @property {BookmarkDao} bookmarkDao Singleton DAO implementing bookmark CRUD operations
@@ -32,6 +34,8 @@ export default class BookmarkController implements BookmarkControllerI {
         if (BookmarkController.bookmarkController === null) {
             BookmarkController.bookmarkController = new BookmarkController();
             app.get("/api/users/:uid/bookmarks", BookmarkController.bookmarkController.findAllTuitsBookmarkedByUser);
+            app.get("/api/tuits/:tid/bookmarks", BookmarkController.bookmarkController.findAllUserWhoBookmarkedTuit);
+            app.get("/api/users/:uid/bookmarkscheck/:tid", BookmarkController.bookmarkController.checkUserBookmarkedTuit);
             app.post("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userBookmarksTuit);
             app.delete("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userUnBookmarksTuit);
         }
@@ -50,6 +54,28 @@ export default class BookmarkController implements BookmarkControllerI {
      */
     findAllTuitsBookmarkedByUser = (req: Request, res: Response) =>
         BookmarkController.bookmarkDao.findAllTuitsBookmarkedByUser(req.params.uid)
+            .then(bookmarks => res.json(bookmarks));
+
+    /**
+     * Retrieves all users who bookmarked a tuit
+     * @param {Request} req Represents request from client, including the path
+     * parameter uid representing the given user
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the tuits objects
+     */
+    findAllUserWhoBookmarkedTuit = (req: Request, res: Response) =>
+        BookmarkController.bookmarkDao.findAllUserWhoBookmarkedTuit(req.params.tid)
+            .then(bookmarks => res.json(bookmarks));
+
+    /**
+     * Checks if one user follows another user
+     * @param {Request} req Represents request from client, including the path
+     * parameter uid representing the following user
+     * @param {Response} res Represents response to client, including the
+     * body formatted as JSON arrays containing the user objects
+     */
+    checkUserBookmarkedTuit = (req: Request, res: Response) =>
+        BookmarkController.bookmarkDao.checkUserBookmarkedTuit(req.params.tid, req.params.uid)
             .then(bookmarks => res.json(bookmarks));
 
     /**

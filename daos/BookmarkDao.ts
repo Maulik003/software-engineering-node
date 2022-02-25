@@ -6,6 +6,7 @@
 import BookmarkDaoI from "../interfaces/BookmarkDaoI";
 import Bookmark from "../models/bookmarks/Bookmark";
 import BookmarkModel from "../mongoose/bookmarks/BookmarkModel";
+import FollowModel from "../mongoose/follows/FollowModel";
 
 /**
  * @class BookmarkDao Implements Data Access Object managing data storage
@@ -40,6 +41,28 @@ export default class BookmarkDao implements BookmarkDaoI {
             .find({bookmarkedBy: uid})
             .populate("bookmarkedTuit")
             .exec();
+
+    /**
+     * Uses BookmarkModel to retrieve all Users who bookmarked a tuit
+     * @param {string} tid Tuit's primary key
+     * @returns Promise To be notified when the users are retrieved from
+     * database
+     */
+    findAllUserWhoBookmarkedTuit = async (tid: string): Promise<Bookmark[]> =>
+        BookmarkModel
+            .find({bookmarkedTuit: tid})
+            .populate("bookmarkedBy")
+            .exec();
+
+    /**
+     * Uses BookmarkModel to check if one user bookmarked a tuit
+     * @param {string} uid User's primary key
+     * @param {string} tuid Tuit's primary key
+     * @returns Promise To be notified when the results are retrieved from
+     * database
+     */
+    checkUserBookmarkedTuit = async (tid: string, uid: string): Promise<Boolean> =>
+        BookmarkModel.exists({'bookmarkedTuit': tid, 'bookmarkedBy': uid});
 
     /**
      * Removes bookmark instance into the database

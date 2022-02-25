@@ -11,4 +11,8 @@ export default interface FollowDaoI {
     userUnfollowsAnotherUser(uid: string, fuid: string): Promise<any>;
 
     userFollowsAnotherUser(uid: string, fuid: string): Promise<Follow>;
+
+    checkUserFollowsAnotherUser(uid: string, fuid: string): Promise<Boolean>;
+
+    checkUserIsFollowedByAnotherUser(uid: string, fuid: string): Promise<Boolean>;
 };
