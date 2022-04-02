@@ -20,14 +20,13 @@ import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
 import GroupController from "./controllers/GroupController";
 import DislikeController from "./controllers/DislikeController";
-
 const cors = require("cors");
 const session = require("express-session");
 
 // build the connection string
 const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = "Maulik003";
-const DB_PASSWORD = "Maulik123";
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
 const HOST = "cluster0.qcvyx.mongodb.net";
 const DB_NAME = "Tuiter";
 const DB_QUERY = "retryWrites=true&w=majority";
@@ -37,21 +36,21 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'https://profound-valkyrie-6595dc.netlify.app'
+    origin: process.env.CORS_ORIGIN
 }));
 
 let sess = {
-    secret: "Random",
+    secret: process.env.EXPRESS_SESSION_SECRET,
     saveUninitialized: true,
     resave: true,
     cookie: {
-        secure: false
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === "production",
     }
 }
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
+if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
