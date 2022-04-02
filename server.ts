@@ -36,7 +36,7 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    origin: 'https://profound-valkyrie-6595dc.netlify.app'
 }));
 
 let sess = {
