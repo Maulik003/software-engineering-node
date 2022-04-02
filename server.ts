@@ -20,13 +20,14 @@ import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
 import GroupController from "./controllers/GroupController";
 import DislikeController from "./controllers/DislikeController";
+
 const cors = require("cors");
 const session = require("express-session");
 
 // build the connection string
 const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_USERNAME = "Maulik003";
+const DB_PASSWORD = "Maulik123";
 const HOST = "cluster0.qcvyx.mongodb.net";
 const DB_NAME = "Tuiter";
 const DB_QUERY = "retryWrites=true&w=majority";
@@ -36,11 +37,11 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: process.env.CORS_ORIGIN
+    origin: 'https://profound-valkyrie-6595dc.netlify.app'
 }));
 
 let sess = {
-    secret: process.env.EXPRESS_SESSION_SECRET,
+    secret: 'Random123',
     saveUninitialized: true,
     resave: true,
     cookie: {
