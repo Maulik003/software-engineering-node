@@ -1,8 +1,17 @@
+/**
+ * @file Implements DAO managing data storage of likes. Uses mongoose LikeModel
+ * to integrate with MongoDB
+ */
 import LikeDaoI from "../interfaces/LikeDaoI";
 import LikeModel from "../mongoose/likes/LikeModel";
 import Like from "../models/likes/Like";
 import DislikeModel from "../mongoose/dislikes/DislikeModel";
 
+/**
+ * @class UserDao Implements Data Access Object managing data storage
+ * of Users
+ * @property {UserDao} userDao Private single instance of UserDao
+ */
 export default class LikeDao implements LikeDaoI {
     private static likeDao: LikeDao | null = null;
     public static getInstance = (): LikeDao => {
@@ -39,8 +48,8 @@ export default class LikeDao implements LikeDaoI {
     countHowManyLikedTuit = async (tid: string): Promise<any> =>
         LikeModel.count({tuit: tid});
 
-    findUserDisLikesTuit = async (uid: string, tid: string): Promise<any> =>
+    /*findUserDisLikesTuit = async (uid: string, tid: string): Promise<any> =>
         DislikeModel.findOne({tuit: tid, dislikedBy: uid});
     countHowManyDisLikedTuit = async (tid: string): Promise<any> =>
-        DislikeModel.count({tuit: tid});
+        DislikeModel.count({tuit: tid});*/
 }

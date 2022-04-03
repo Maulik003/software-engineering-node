@@ -1,5 +1,4 @@
 import Like from "../models/likes/Like";
-import Dislike from "../models/dislikes/Dislike";
 
 /**
  * @file Declares API for Likes related data access object methods

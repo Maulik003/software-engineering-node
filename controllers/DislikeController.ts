@@ -1,5 +1,5 @@
 /**
- * @file Controller RESTful Web service API for likes resource
+ * @file Controller RESTful Web service API for dislikes resource
  */
 import {Express, Request, Response} from "express";
 import LikeDao from "../daos/LikeDao";
@@ -9,7 +9,7 @@ import DislikeControllerI from "../interfaces/DislikeControllerI";
 import DislikeDao from "../daos/DislikeDao";
 
 /**
- * @class TuitController Implements RESTful Web service API for likes resource.
+ * @class DislikeController Implements RESTful Web service API for likes resource.
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>GET /api/users/:uid/likes to retrieve all the tuits liked by a user
@@ -49,7 +49,7 @@ export default class DislikeController implements DislikeControllerI {
     }
 
     /**
-     * Retrieves all users that liked a tuit from the database
+     * Retrieves all users that disliked a tuit from the database
      * @param {Request} req Represents request from client, including the path
      * parameter tid representing the liked tuit
      * @param {Response} res Represents response to client, including the
@@ -60,7 +60,7 @@ export default class DislikeController implements DislikeControllerI {
             .then(likes => res.json(likes));
 
     /**
-     * Retrieves all tuits liked by a user from the database
+     * Retrieves all tuits disliked by a user from the database
      * @param {Request} req Represents request from client, including the path
      * parameter uid representing the user liked the tuits
      * @param {Response} res Represents response to client, including the
@@ -84,7 +84,7 @@ export default class DislikeController implements DislikeControllerI {
 
     /**
      * @param {Request} req Represents request from client, including the
-     * path parameters uid and tid representing the user that is liking the tuit
+     * path parameters uid and tid representing the user that is disliking the tuit
      * and the tuit being liked
      * @param {Response} res Represents response to client, including the
      * body formatted as JSON containing the new likes that was inserted in the
